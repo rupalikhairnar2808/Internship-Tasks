@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        h1 {
+            font-weight: bold;  /* Makes the title bold */
+            font-size: 48px;    /* Increases the title size */
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Image Gallery</h1>
+
+    <!-- Filter -->
+    <div class="filter-container">
+        <button class="filter-btn" onclick="filterImages('all')">All</button>
+        <button class="filter-btn" onclick="filterImages('nature')">Nature</button>
+        <button class="filter-btn" onclick="filterImages('flower')">Flower</button>
+        <button class="filter-btn" onclick="filterImages('bird')">Bird</button>
+    </div>
+
+    <!-- Gallery -->
+    <div class="gallery">
+        <div class="gallery-item nature">
+            <img src="nature1.jpg" alt="Nature Image 1" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item nature">
+            <img src="nature2.jpg" alt="Nature Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item nature">
+            <img src="nature3.jpg" alt="Nature Image 1" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item nature">
+            <img src="nature4.jpg" alt="Nature Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item bird ">
+            <img src="bird1.jpg" alt="Bird Image 1" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item bird">
+            <img src="bird2.jpg" alt="Bird Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item bird">
+            <img src="bird3.jpg" alt="Bird Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item bird">
+            <img src="bird4.jpg" alt="Bird Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item bird">
+            <img src="bird5.jpg" alt="Bird Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item flower">
+            <img src="flower1.jpg" alt="Flower Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item flower">
+            <img src="flower2.jpg" alt="Flower Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item flower">
+            <img src="flower3.jpg" alt="Flower Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item flower">
+            <img src="flower4.jpg" alt="Flower Image 2" onclick="openModal(this)">
+        </div>
+        <div class="gallery-item flower">
+            <img src="flower5.jpg" alt="Flower Image 2" onclick="openModal(this)">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-img" class="modal-content">
+        <div id="caption"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
