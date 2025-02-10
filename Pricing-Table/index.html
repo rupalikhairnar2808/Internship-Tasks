@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Pricing Table with Dark Mode and FAQ</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Dark Mode Styles */
+    .bg-dark-custom {
+      background-color: #343a40;
+    }
+
+    .text-light-custom {
+      color: white;
+    }
+
+    /* Light Mode Styles */
+    .bg-light-custom {
+      background-color: #f8f9fa;
+    }
+
+    .text-dark-custom {
+      color: black;
+    }
+  </style>
+</head>
+<body class="bg-light-custom text-dark-custom">
+
+  <!-- Theme Toggle Button -->
+  <div class="container text-center mt-4">
+    <button id="theme-toggle" class="btn btn-secondary">Dark/Light Mode</button>
+  </div>
+
+  <!-- Pricing Table -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Basic Plan</h5>
+            <p class="card-text">$10/month</p>
+            <ul>
+              <li>1 User</li>
+              <li>10 GB Storage</li>
+              <li>Email Support</li>
+            </ul>
+            <button class="btn btn-primary">Choose Plan</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Standard Plan</h5>
+            <p class="card-text">$20/month</p>
+            <ul>
+              <li>5 Users</li>
+              <li>50 GB Storage</li>
+              <li>Priority Support</li>
+            </ul>
+            <button class="btn btn-primary">Choose Plan</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Premium Plan</h5>
+            <p class="card-text">$30/month</p>
+            <ul>
+              <li>Unlimited Users</li>
+              <li>100 GB Storage</li>
+              <li>24/7 Support</li>
+            </ul>
+            <button class="btn btn-primary">Choose Plan</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FAQ Accordion Section -->
+  <div class="container mt-5">
+    <h3>Frequently Asked Questions</h3>
+    <div class="accordion" id="faqAccordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              What is the pricing for each plan?
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#faqAccordion">
+          <div class="card-body">
+            The pricing varies depending on the plan you select. Basic is $10/month, Standard is $20/month, and Premium is $30/month.
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Is there any free trial?
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#faqAccordion">
+          <div class="card-body">
+            Yes, we offer a 14-day free trial for all plans!
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingThree">
+          <h5 class="mb-0">
+            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              Can I upgrade my plan later?
+            </button>
+          </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#faqAccordion">
+          <div class="card-body">
+            Yes, you can upgrade your plan at any time. Contact our support for assistance.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <!-- JavaScript to Toggle Dark/Light Mode -->
+  <script>
+    const themeToggleButton = document.getElementById("theme-toggle");
+
+    // Check localStorage for theme preference and apply it
+    const currentTheme = localStorage.getItem("theme") || "light";
+    if (currentTheme === "dark") {
+      document.body.classList.add("bg-dark-custom", "text-light-custom");
+    } else {
+      document.body.classList.add("bg-light-custom", "text-dark-custom");
+    }
+
+    // Toggle theme and save preference in localStorage
+    themeToggleButton.addEventListener("click", () => {
+      if (document.body.classList.contains("bg-light-custom")) {
+        document.body.classList.remove("bg-light-custom", "text-dark-custom");
+        document.body.classList.add("bg-dark-custom", "text-light-custom");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.body.classList.remove("bg-dark-custom", "text-light-custom");
+        document.body.classList.add("bg-light-custom", "text-dark-custom");
+        localStorage.setItem("theme", "light");
+      }
+    });
+  </script>
+
+</body>
+</html>
