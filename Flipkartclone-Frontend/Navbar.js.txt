@@ -1,0 +1,22 @@
+// Navbar.js
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+const Navbar = () => {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const loggedInUser  = users.length > 0 ? users[0] : null; // Assuming the first user is logged in for demo purposes
+
+    return (
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">MyApp</Link>
+                <div className="collapse navbar-collapse">
+                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        {loggedInUser  ? (
+                            <li className="nav-item">
+                                <span className="nav-link">Welcome, {loggedInUser .name}</span>
+                            </li>
+                        ) : (
+                            <>
+                                <li className="nav-item">
+                                    <Link
