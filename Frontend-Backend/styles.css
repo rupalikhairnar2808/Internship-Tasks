@@ -1,0 +1,248 @@
+/* Apply a full-page gradient background */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #a8e063, #56ab2f);
+    color: #333;
+}
+h1 {
+    text-align: center;
+    font-size: 28px;
+    color: white;
+    margin-top: 20px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #0d2f0d, #144d14);
+    padding: 15px;
+    border-radius: 8px;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Container Styling */
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+.header {
+    text-align: center;
+    padding: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff758c, #ff7eb3);
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons */
+button {
+    padding: 12px 18px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s ease-in-out;
+    background: linear-gradient(45deg, #ff0000, #b30000);
+}
+
+button:hover {
+    background: linear-gradient(45deg, #0056b3, #003d82);
+}
+
+/* Product List Container */
+.product-list-container {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background: linear-gradient(135deg, hsla(233, 36%, 96%, 0.298), #190256);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Product Cards */
+.product-card {
+    background: linear-gradient(135deg, #ffffffd5, #68e070);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Inputs and Selects */
+input, select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+input:focus, select:focus {
+    border-color: #ff758c;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 117, 140, 0.5);
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.pagination button {
+    padding: 10px 15px;
+    background: linear-gradient(45deg, #d70707, #0056b3);
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.pagination button:hover {
+    background: linear-gradient(45deg, #0056b3, #004494);
+}
+
+.pagination button.active {
+    background: linear-gradient(45deg, #d70707, #0056b3);
+    font-weight: bold;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 15px;
+    background: linear-gradient(45deg, #007bff, #0056b3);
+    color: white;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+/* Add Product Form */
+.add-product-form {
+    background: linear-gradient(135deg, #0d2f0d, #144d14);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    width: 400px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    color: white;
+}
+
+.add-product-form h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: #ffeb3b; /* ✅ Bright yellow for a professional look */
+}
+
+/* Input Fields */
+.add-product-form input,
+.add-product-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: none;
+    background: #183d18;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s ease-in-out;
+}
+
+.add-product-form input::placeholder {
+    color: #b5cbb5;
+}
+
+.add-product-form input:focus,
+.add-product-form select:focus {
+    background: #225622;
+    border: 1px solid #ffeb3b;
+}
+
+/* Submit Button */
+.add-product-form button {
+    padding: 12px;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient(45deg, #0e3b0e, #0a250a);
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.3s ease-in-out;
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.add-product-form button:hover {
+    background: linear-gradient(45deg, #0a250a, #061706);
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+    .add-product-form {
+        width: 90%;
+    }
+}
+.product-form-container {
+    background: linear-gradient(135deg, #004d00, #008000);
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    margin: 20px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.product-form-container h2 {
+    text-align: center;
+    color: white;
+}
+
+.product-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.product-form input,
+.product-form textarea,
+.product-form select,
+.product-form button {
+    margin: 10px 0;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.product-form textarea {
+    resize: vertical;
+}
+
+.product-form button {
+    background-color: #006400;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.product-form button:hover {
+    background-color: #004d00;
+}
