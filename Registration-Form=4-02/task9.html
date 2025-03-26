@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h2 {
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-btn:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+    <form id="registrationForm">
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" required>
+            <div class="error" id="nameError"></div>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <div class="error" id="emailError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" name="phone" required>
+            <div class="error" id="phoneError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <div class="error" id="passwordError"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div class="error" id="confirmPasswordError"></div>
+        </div>
+
+        <button type="submit" class="submit-btn">Register</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById("registrationForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        let valid = true;
+
+        // Name Validation
+        let name = document.getElementById("name").value.trim();
+        if (name === "") {
+            document.getElementById("nameError").innerText = "Name is required.";
+            valid = false;
+        } else {
+            document.getElementById("nameError").innerText = "";
+        }
+
+        // Email Validation
+        let email = document.getElementById("email").value.trim();
+        let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+        if (!emailPattern.test(email)) {
+            document.getElementById("emailError").innerText = "Invalid email format.";
+            valid = false;
+        } else {
+            document.getElementById("emailError").innerText = "";
+        }
+
+        // Phone Number Validation (10 digits only)
+        let phone = document.getElementById("phone").value.trim();
+        let phonePattern = /^[0-9]{10}$/;
+        if (!phonePattern.test(phone)) {
+            document.getElementById("phoneError").innerText = "Enter a valid 10-digit phone number.";
+            valid = false;
+        } else {
+            document.getElementById("phoneError").innerText = "";
+        }
+
+        // Password Validation (Min 8 chars, 1 uppercase, 1 number)
+        let password = document.getElementById("password").value.trim();
+        let passwordPattern = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
+        if (!passwordPattern.test(password)) {
+            document.getElementById("passwordError").innerText = "Password must be at least 8 characters long, contain 1 uppercase letter and 1 number.";
+            valid = false;
+        } else {
+            document.getElementById("passwordError").innerText = "";
+        }
+
+        // Confirm Password Validation
+        let confirmPassword = document.getElementById("confirmPassword").value.trim();
+        if (confirmPassword !== password) {
+            document.getElementById("confirmPasswordError").innerText = "Passwords do not match.";
+            valid = false;
+        } else {
+            document.getElementById("confirmPasswordError").innerText = "";
+        }
+
+        // If all validations pass, submit the form
+        if (valid) {
+            alert("Registration Successful!");
+            document.getElementById("registrationForm").reset();
+        }
+    });
+</script>
+
+</body>
+</html>
