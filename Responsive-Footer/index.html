@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Navbar and Footer</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    /* Navbar styles */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 15px 20px;
+    }
+
+    .navbar .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .navbar .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .navbar .nav-links a {
+      color: white;
+      text-decoration: none;
+      margin: 0 10px;
+      padding: 8px 12px;
+      transition: background 0.3s;
+    }
+
+    .navbar .nav-links a:hover {
+      background-color: #575757;
+      border-radius: 4px;
+    }
+
+    .navbar .info-section {
+      text-align: center;
+      color: #ccc;
+      flex: 1;
+      margin: 0 20px;
+    }
+
+    .navbar .toggle-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+      }
+
+      .navbar .info-section {
+        margin: 10px 0;
+      }
+
+      .navbar .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .navbar .nav-links.show {
+        display: flex;
+      }
+
+      .navbar .toggle-btn {
+        display: block;
+      }
+    }
+
+    /* Footer styles */
+    .footer {
+      background-color: #1e2129;
+      color: white;
+      padding: 50px 20px;
+    }
+
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .footer .column {
+      flex: 1;
+      margin: 10px;
+      min-width: 250px;
+    }
+
+    .footer .column h3 {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    .footer .column p, .footer .column a {
+      color: #ccc;
+      text-decoration: none;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .footer .column a:hover {
+      color: #ff5e14;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 15px 0;
+      background-color: #13151a;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+
+    .footer-bottom a {
+      color: #ff5e14;
+      text-decoration: none;
+    }
+
+    .footer-bottom a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav class="navbar" style="display: flex; align-items: center; justify-content: space-between; background-color: #333; color: white; padding: 10px 20px; font-family: Arial, sans-serif;">
+  <div class="logo" style="display: flex; align-items: center; gap: 10px;">
+    <img src="WhatsApp-Image-2023-09-04-at-12.13.58.jpeg" alt="logo" style="max-width: 50px; height: auto;">
+    <span style="font-size: 1.5em; font-weight: bold;">Numetry Tech</span>
+  </div>
+  <div class="info-section" style="font-size: 0.9em;">Welcome to our website! Explore our services and more.</div>
+  <button class="toggle-btn" onclick="toggleMenu()" style="background: none; border: none; color: white; font-size: 1.5em; cursor: pointer;">&#9776;</button>
+  <div class="nav-links" style="display: flex; gap: 20px;">
+    <a href="#" style="color: white; text-decoration: none;">Home</a>
+    <a href="#" style="color: white; text-decoration: none;">About</a>
+    <!-- Dropdown for Services -->
+    <div class="dropdown" style="position: relative; display: inline-block;">
+      <a href="#" style="color: white; text-decoration: none;">Services</a>
+      <div class="dropdown-content" style="display: none; position: absolute; background-color: #444; min-width: 150px; box-shadow: 0px 8px 16px rgba(0,0,0,0.2); z-index: 1; flex-direction: column; text-align: left;">
+        <a href="#web-development" style="color: white; padding: 10px 15px; text-decoration: none; display: block;">Web Development</a>
+        <a href="#cloud-solutions" style="color: white; padding: 10px 15px; text-decoration: none; display: block;">Cloud Solutions</a>
+        <a href="#ai-services" style="color: white; padding: 10px 15px; text-decoration: none; display: block;">AI Services</a>
+      </div>
+    </div>
+    <a href="#" style="color: white; text-decoration: none;">Contact</a>
+  </div>
+</nav>
+
+<script>
+  // Show/hide dropdown on hover
+  document.querySelector('.dropdown').addEventListener('mouseenter', function () {
+    this.querySelector('.dropdown-content').style.display = 'block';
+  });
+
+  document.querySelector('.dropdown').addEventListener('mouseleave', function () {
+    this.querySelector('.dropdown-content').style.display = 'none';
+  });
+
+  // Toggle menu for mobile
+  function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+  }
+</script>
+
+
+
+  <!-- Main Content Placeholder -->
+  <main>
+    <section style="padding: 50px; text-align: center;">
+      <h1>Responsive Navbar and Footer</h1>
+      <p>Prasad Gophan</p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+<footer class="footer" style="background-color: #333; color: white; padding: 40px 20px; font-family: Arial, sans-serif;">
+  <div class="container" style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+    <!-- About Us Section -->
+    <div class="column" style="flex: 1; min-width: 200px;">
+      <h3 style="margin-bottom: 15px;">About Us</h3>
+      <img src="WhatsApp-Image-2023-09-04-at-12.13.58.jpeg" alt="logo" style="max-width: 100px; height: auto; margin-bottom: 10px;">
+      <p>We are a leading IT Services Company in creativity and technology innovation in 2023.</p>
+    </div>
+    
+    <!-- Quick Links Section -->
+    <div class="column" style="flex: 1; min-width: 200px;">
+      <h3 style="margin-bottom: 15px;">Quick Links</h3>
+      <ul id="quick-links" style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 10px;"><button onclick="showInfo('services')" style="background: none; border: none; color: white; cursor: pointer;">Services</button></li>
+        <li style="margin-bottom: 10px;"><button onclick="showInfo('careers')" style="background: none; border: none; color: white; cursor: pointer;">Careers</button></li>
+        <li><button onclick="showInfo('contact')" style="background: none; border: none; color: white; cursor: pointer;">Contact Us</button></li>
+      </ul>
+      <div id="info-section" style="margin-top: 20px; display: none;">
+        <p id="info-content"></p>
+      </div>
+    </div>
+    
+    <!-- Contact Section -->
+    <div class="column" style="flex: 1; min-width: 200px;">
+      <h3 style="margin-bottom: 15px;">Contact</h3>
+      <p>Email: info@numetry.in</p>
+      <p>Phone: +123 456 789</p>
+      <p>Address: Regus, Skye One Unit No 101, 1st Floor, Kalyani Nagar, Pune-411006, Maharashtra.</p>
+    </div>
+  </div>
+  
+  <!-- Footer Bottom -->
+  <div class="footer-bottom" style="margin-top: 20px; text-align: center; font-size: 0.9em; border-top: 1px solid #444; padding-top: 10px;">
+    &copy; 2025 Numetry Technologies. All rights reserved. | <a href="#" style="color: #ff5e14; text-decoration: none;">Privacy Policy</a> | <a href="#" style="color: #ff5e14; text-decoration: none;">Terms of Service</a>
+  </div>
+</footer>
+
+<script>
+  function showInfo(section) {
+    const infoSection = document.getElementById('info-section');
+    const infoContent = document.getElementById('info-content');
+    infoSection.style.display = 'block';
+
+    if (section === 'services') {
+      infoContent.innerText = 'We offer Web Development, Cloud Solutions, and more.';
+    } else if (section === 'careers') {
+      infoContent.innerText = 'Join our team and shape the future of technology.';
+    } else if (section === 'contact') {
+      infoContent.innerText = 'Email us at info@numetry.in or call +123456789.';
+    }
+  }
+</script>
+</body>
+</html>
