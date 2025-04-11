@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <style>
+        .floating-cart {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #3b82f6;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .floating-cart:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #3b82f6;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Floating Cart Icon -->
+    <div class="floating-cart" onclick="showCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count">0</span>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg w-11/12 md:w-1/2 lg:w-1/3">
+            <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
+            <div id="cart-items" class="space-y-4"></div>
+            <div class="mt-4">
+                <p class="text-lg font-bold">Total: ₹<span id="cart-total">0</span></p>
+            </div>
+            <button onclick="closeCart()" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded">Close</button>
+            <button onclick="checkout()" class="mt-4 px-4 py-2 bg-green-600 text-white rounded">Checkout</button>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-10">
+        <h1 class="text-3xl font-bold">Product Details</h1>
+        <div id="product-details" class="mt-6 bg-white p-6 rounded shadow-md">
+            <!-- Product details will be dynamically inserted here -->
+        </div>
+        <a href="index.html" class="mt-4 inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Back to Home</a>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        const products = [
+            { id: 1, name: "Smartphone", price: 12000, rating: 4.5, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p1.png", totalPurchases: 1000, modeOfOrder: "Online", category: "Electronics" },
+            { id: 2, name: "T-Shirt", price: 500, rating: 4.2, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2000, modeOfOrder: "Online", category: "Clothing" },
+            { id: 3, name: "Sneakers", price: 2500, rating: 4.7, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s1.png", totalPurchases: 1500, modeOfOrder: "Online", category: "Footwear" },
+            { id: 4, name: "Smartwatch", price: 3500, rating: 4.2, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p4.png", totalPurchases: 800, modeOfOrder: "Online", category: "Electronics" },
+            { id: 5, name: "Jeans", price: 1200, rating: 4.1, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 3000, modeOfOrder: "Online", category: "Clothing" },
+            { id: 6, name: "Running Shoes", price: 3000, rating: 4.6, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s3.png", totalPurchases: 1200, modeOfOrder: "Online", category: "Footwear" },
+            { id: 7, name: "Laptop", price: 45000, rating: 4.8, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p2.png", totalPurchases: 500, modeOfOrder: "Online", category: "Electronics" },
+            { id: 8, name: "Hoodie", price: 1500, rating: 4.0, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2500, modeOfOrder: "Online", category: "Clothing" },
+            { id: 9, name: "Casual Shoes", price: 2000, rating: 4.4, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s1.png", totalPurchases: 1800, modeOfOrder: "Online", category: "Footwear" },
+            { id: 10, name: "Tablet", price: 20000, rating: 4.2, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p4.png", totalPurchases: 700, modeOfOrder: "Online", category: "Electronics" },
+            { id: 11, name: "Shirt", price: 800, rating: 4.3, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2200, modeOfOrder: "Online", category: "Clothing" },
+            { id: 12, name: "Formal Shoes", price: 3500, rating: 4.5, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s2.png", totalPurchases: 900, modeOfOrder: "Online", category: "Footwear" },
+            { id: 13, name: "Headphones", price: 1500, rating: 4.6, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p3.png", totalPurchases: 2000, modeOfOrder: "Online", category: "Electronics" },
+            { id: 14, name: "Jacket", price: 2500, rating: 4.1, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 1300, modeOfOrder: "Online", category: "Clothing" },
+            { id: 15, name: "Sandals", price: 1000, rating: 4.0, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s1.png", totalPurchases: 1700, modeOfOrder: "Online", category: "Footwear" },
+            { id: 16, name: "Camera", price: 30000, rating: 4.7, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p1.png", totalPurchases: 600, modeOfOrder: "Online", category: "Electronics" },
+            { id: 17, name: "Sweater", price: 1800, rating: 4.2, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 1900, modeOfOrder: "Online", category: "Clothing" },
+            { id: 18, name: "Boots", price: 4000, rating: 4.4, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s2.png", totalPurchases: 1100, modeOfOrder: "Online", category: "Footwear" },
+            { id: 19, name: "Speaker", price: 5000, rating: 4.3, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p4.png", totalPurchases: 900, modeOfOrder: "Online", category: "Electronics" },
+            { id: 20, name: "Shorts", price: 700, rating: 4.0, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2400, modeOfOrder: "Online", category: "Clothing" },
+            { id: 21, name: "Slippers", price: 500, rating: 3.9, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s1.png", totalPurchases: 1600, modeOfOrder: "Online", category: "Footwear" },
+            { id: 22, name: "Drone", price: 50000, rating: 4.8, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p1.png", totalPurchases: 400, modeOfOrder: "Online", category: "Electronics" },
+            { id: 23, name: "Trousers", price: 1200, rating: 4.1, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2100, modeOfOrder: "Online", category: "Clothing" },
+            { id: 24, name: "Sneakers", price: 3000, rating: 4.5, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s3.png", totalPurchases: 1400, modeOfOrder: "Online", category: "Footwear" },
+            { id: 25, name: "Smart TV", price: 60000, rating: 4.6, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p4.png", totalPurchases: 500, modeOfOrder: "Online", category: "Electronics" },
+            { id: 26, name: "Blazer", price: 4000, rating: 4.3, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 800, modeOfOrder: "Online", category: "Clothing" },
+            { id: 27, name: "Loafers", price: 2500, rating: 4.2, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s1.png", totalPurchases: 1200, modeOfOrder: "Online", category: "Footwear" },
+            { id: 28, name: "Gaming Console", price: 35000, rating: 4.7, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/p1.png", totalPurchases: 300, modeOfOrder: "Online", category: "Electronics" },
+            { id: 29, name: "Tank Top", price: 600, rating: 3.8, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/c2.png", totalPurchases: 2300, modeOfOrder: "Online", category: "Clothing" },
+            { id: 30, name: "Hiking Boots", price: 5000, rating: 4.5, image: "C:/Users/New folder/Desktop/java and html code (project)/HTML code/Task=27-03/images/s2.png", totalPurchases: 1000, modeOfOrder: "Online", category: "Footwear" }
+        ];
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+        const product = products.find(p => p.id === parseInt(productId));
+
+        if (product) {
+            document.getElementById("product-details").innerHTML = `
+                <div class="flex flex-col md:flex-row gap-6">
+                    <div class="w-full md:w-1/2">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-64 object-cover mb-4">
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <h2 class="text-2xl font-bold">${product.name}</h2>
+                        <p class="text-gray-600 mt-2">Price: ₹${product.price}</p>
+                        <p class="text-yellow-500 mt-2">Rating: ${product.rating} ⭐</p>
+                        <p class="text-gray-600 mt-2">Total Purchases: ${product.totalPurchases}</p>
+                        <p class="text-gray-600 mt-2">Mode of Order: ${product.modeOfOrder}</p>
+                        <p class="text-gray-600 mt-2">Category: ${product.category}</p>
+                        <p class="text-gray-600 mt-2">Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <div class="mt-4 flex gap-4">
+                            <button class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" onclick="addToCart(${product.id})">Add to Cart</button>
+                            <button class="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700" onclick="addToWishlist(${product.id})">Add to Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            document.getElementById("product-details").innerHTML = `<p class="text-red-500">Product not found!</p>`;
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                cart.push(product);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                updateCartCount();
+            }
+        }
+
+        function addToWishlist(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product && !wishlist.some(item => item.id === productId)) {
+                wishlist.push(product);
+                localStorage.setItem("wishlist", JSON.stringify(wishlist));
+                alert("Added to Wishlist!");
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartCount();
+            showCart(); // Refresh the cart modal
+        }
+
+        function updateCartCount() {
+            document.getElementById("cart-count").textContent = cart.length;
+        }
+
+        function showCart() {
+            const cartModal = document.getElementById("cart-modal");
+            const cartItems = document.getElementById("cart-items");
+            const cartTotal = document.getElementById("cart-total");
+
+            cartItems.innerHTML = "";
+            let total = 0;
+
+            cart.forEach(item => {
+                cartItems.innerHTML += `
+                    <div class="flex justify-between items-center">
+                        <p>${item.name}</p>
+                        <p>₹${item.price}</p>
+                        <button class="px-2 py-1 bg-red-600 text-white rounded" onclick="removeFromCart(${item.id})">Remove</button>
+                    </div>`;
+                total += item.price;
+            });
+
+            cartTotal.textContent = total;
+            cartModal.classList.remove("hidden");
+        }
+
+        function closeCart() {
+            const cartModal = document.getElementById("cart-modal");
+            cartModal.classList.add("hidden");
+        }
+             
+        function checkout() {
+    // Redirect to the checkout page
+    window.location.href = "checkout.html";
+}
+
+        updateCartCount();
+    </script>
+</body>
+</html>
